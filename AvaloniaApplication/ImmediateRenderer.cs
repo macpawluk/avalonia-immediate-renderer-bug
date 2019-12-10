@@ -5,12 +5,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Avalonia;
+using Avalonia.Controls;
 using Avalonia.Logging;
 using Avalonia.Media;
 using Avalonia.Platform;
 using Avalonia.Rendering;
 using Avalonia.VisualTree;
-
 
 namespace AvaloniaApplication
 {
@@ -310,7 +310,15 @@ namespace AvaloniaApplication
 
                         if (!child.ClipToBounds || clipRect.Intersects(childBounds))
                         {
-                            var childClipRect = clipRect.Translate(-childBounds.Position);
+                            var childClipRect = child.RenderTransform == null
+                                ? clipRect.Translate(-childBounds.Position)
+                                : clipRect;
+
+                            if (visual is LayoutTransformControl ltc)
+                            {
+                                childClipRect = new Rect(child.Bounds.Size);
+                            }
+
                             Render(context, child, childClipRect);
                         }
                         else
