@@ -10,24 +10,27 @@
         Width="300"
         Background="LightBlue"
         ClipToBounds="True">
-    <StackPanel Orientation="Horizontal"
-                VerticalAlignment="Top"
-                HorizontalAlignment="Right"
-                Margin="0 10 0 0"
-                RenderTransformOrigin="0 0">
-      <StackPanel.RenderTransform>
-        <TransformGroup>
-          <RotateTransform Angle="90" />
-          <TranslateTransform X="140" />
-        </TransformGroup>
-      </StackPanel.RenderTransform>
+    <Canvas>
+      <LayoutTransformControl VerticalAlignment="Top"
+                              HorizontalAlignment="Left"
+                              Canvas.Bottom="10"
+                              Canvas.Left="280">
+        <LayoutTransformControl.LayoutTransform>
+          <RotateTransform Angle="-90" />
+        </LayoutTransformControl.LayoutTransform>
 
-      <TextBlock Text="This " />
-      <TextBlock Text="is " />
-      <TextBlock Text="some " />
-      <TextBlock Text="text " />
-      <TextBlock Text="in " />
-      <TextBlock Text="pieces. " />
-    </StackPanel>
+        <!--Surprisingly when ClipToBounds will be set to true here, content won't be trimmed.-->
+        <StackPanel Orientation="Horizontal"
+                    Background="Yellow"
+                    ClipToBounds="False">
+          <TextBlock Text="This " />
+          <TextBlock Text="is " />
+          <TextBlock Text="some " />
+          <TextBlock Text="text " />
+          <TextBlock Text="in " />
+          <TextBlock Text="pieces. " />
+        </StackPanel>
+      </LayoutTransformControl>
+    </Canvas>
   </Grid>
 </Window>
